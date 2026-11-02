@@ -1,0 +1,26 @@
+# BasicUikRegionFlow
+
+main: kit: flow: BasicUikRegionFlow:
+{
+  entity: "uik_region",
+  kind: "basic",
+  name: "BasicUikRegionFlow",
+  step: [
+    {
+      m: {
+        region: "region01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "uik_region_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicUikRegionFlow"
+}

@@ -1,0 +1,116 @@
+# Entity: uik_region
+
+main: kit: entity: uik_region: {
+
+  alias: field: {}
+
+  fields: {
+    address: {
+      h: "Address"
+      n: "address"
+      r: false
+      t: "`$STRING`"
+    }
+    area: {
+      h: "Area"
+      n: "area"
+      r: false
+      t: "`$STRING`"
+    }
+    city: {
+      h: "City"
+      n: "city"
+      r: false
+      t: "`$STRING`"
+    }
+    district: {
+      h: "District"
+      n: "district"
+      r: false
+      sh: "Single-member district number."
+      t: "`$INTEGER`"
+    }
+    lat: {
+      h: "Lat"
+      n: "lat"
+      r: false
+      t: "`$NUMBER`"
+    }
+    lon: {
+      h: "Lon"
+      n: "lon"
+      r: false
+      t: "`$NUMBER`"
+    }
+    n: {
+      h: "N"
+      n: "n"
+      r: false
+      sh: "Polling station (UIK) number."
+      t: "`$INTEGER`"
+    }
+    phone: {
+      h: "Phone"
+      n: "phone"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "uik_region"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /data/uik/{region}.json"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "altayskiy-kray"
+                k: "param"
+                n: "region"
+                or: "region"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/data/uik/{region}.json"
+          q: {
+            exist: [
+              "region"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "data"
+            }
+            {
+              lit: "uik"
+            }
+            {
+              lit: "{region}.json"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.stations`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

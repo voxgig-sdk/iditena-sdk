@@ -1,0 +1,81 @@
+# Entity: visitor_report
+
+main: kit: entity: visitor_report: {
+
+  alias: field: {}
+
+  fields: {
+    closedAt: {
+      h: "Closed At"
+      n: "closedAt"
+      r: false
+      sh: "Poll closing time per district, keyed by district number."
+      t: "`$OBJECT`"
+    }
+    dateFrom: {
+      fo: "date-time"
+      h: "Date From"
+      n: "dateFrom"
+      r: false
+      t: "`$STRING`"
+    }
+    dateTo: {
+      fo: "date-time"
+      h: "Date To"
+      n: "dateTo"
+      r: false
+      t: "`$STRING`"
+    }
+    districts: {
+      h: "Districts"
+      n: "districts"
+      r: true
+      sh: "Two integer counters per district, keyed by district number."
+      t: "`$OBJECT`"
+    }
+    fetchedAt: {
+      fo: "date-time"
+      h: "Fetched At"
+      n: "fetchedAt"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "visitor_report"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/district-visitors"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/district-visitors"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "district-visitors"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

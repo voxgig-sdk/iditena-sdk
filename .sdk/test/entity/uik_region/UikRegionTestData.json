@@ -1,0 +1,60 @@
+{
+  "existing": {
+    "uik_region": {
+      "UIK_REGION00": {
+        "address": "s50",
+        "area": "s51",
+        "city": "s52",
+        "district": 83,
+        "lat": 84,
+        "lon": 85,
+        "n": 86,
+        "phone": "s57",
+        "region": "REGION01"
+      },
+      "UIK_REGION01": {
+        "address": "sa0",
+        "area": "sa1",
+        "city": "sa2",
+        "district": 163,
+        "lat": 164,
+        "lon": 165,
+        "n": 166,
+        "phone": "sa7",
+        "region": "REGION01"
+      },
+      "UIK_REGION02": {
+        "address": "sf0",
+        "area": "sf1",
+        "city": "sf2",
+        "district": 243,
+        "lat": 244,
+        "lon": 245,
+        "n": 246,
+        "phone": "sf7",
+        "region": "REGION01"
+      }
+    }
+  },
+  "new": {
+    "uik_region": {
+      "uik_region_ref01": {
+        "address": "s140",
+        "area": "s141",
+        "city": "s142",
+        "district": 323,
+        "lat": 324,
+        "lon": 325,
+        "n": 326,
+        "phone": "s147"
+      }
+    }
+  },
+  "requests": {
+    "GET /data/uik/{region}.json": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

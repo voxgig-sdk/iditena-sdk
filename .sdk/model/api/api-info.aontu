@@ -1,0 +1,21 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      auth: false
+      description: "Public JSON feeds behind iditena.org, a site covering the September 2026 Russian State Duma elections: single-member district results, the district/candidate finder index, polling-station (UIK) locations, and site visitor counters per district. Knowledge source: the community Swift client https://github.com/l0v3m0n3y/iditena (src/iditena.swift lists four endpoints; there is no documentation) and live GET probes on 2026-10-23, from which every schema here is taken. getUikRegion is not in the client; its path comes from the 'file' field of getUikIndex and was probed for one region. Unverified: the meaning of the two integers per district in getDistrictVisitors (undocumented); /api/results with no district parameter returns a different, all-district summary shape that is not modelled here; only 68 of 83 regions carry a 'file' for getUikRegion, so the others probably 404. Text is in Russian. The data is a post-election snapshot and may stop updating."
+      servers: [
+        {
+          url: "https://iditena.org"
+        }
+      ]
+      summary: "Public JSON feeds behind iditena.org, a site covering the September 2026 Russian State Duma elections: single-member district results, the district/candidate finder index, polling-station (UIK) locations, and site visitor counters per…"
+      title: "Iditena API"
+      version: "1.0.0"
+      website: "https://iditena.org"
+    }
+  }
+}
+

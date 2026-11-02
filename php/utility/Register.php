@@ -1,0 +1,72 @@
+<?php
+declare(strict_types=1);
+
+// Iditena SDK utility registration
+
+require_once __DIR__ . '/../core/UtilityType.php';
+require_once __DIR__ . '/Clean.php';
+require_once __DIR__ . '/Done.php';
+require_once __DIR__ . '/MakeError.php';
+require_once __DIR__ . '/FeatureAdd.php';
+require_once __DIR__ . '/FeatureHook.php';
+require_once __DIR__ . '/FeatureInit.php';
+require_once __DIR__ . '/Fetcher.php';
+require_once __DIR__ . '/MakeFetchDef.php';
+require_once __DIR__ . '/MakeContext.php';
+require_once __DIR__ . '/MakeOptions.php';
+require_once __DIR__ . '/MakeRequest.php';
+require_once __DIR__ . '/MakeResponse.php';
+require_once __DIR__ . '/MakeResult.php';
+require_once __DIR__ . '/MakePoint.php';
+require_once __DIR__ . '/MakeSpec.php';
+require_once __DIR__ . '/MakeUrl.php';
+require_once __DIR__ . '/Param.php';
+require_once __DIR__ . '/PrepareAuth.php';
+require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
+require_once __DIR__ . '/PrepareHeaders.php';
+require_once __DIR__ . '/PrepareMethod.php';
+require_once __DIR__ . '/PrepareParams.php';
+require_once __DIR__ . '/PreparePath.php';
+require_once __DIR__ . '/PrepareQuery.php';
+require_once __DIR__ . '/ResultBasic.php';
+require_once __DIR__ . '/ResultBody.php';
+require_once __DIR__ . '/ResultHeaders.php';
+require_once __DIR__ . '/TransformRequest.php';
+require_once __DIR__ . '/TransformResponse.php';
+
+IditenaUtility::setRegistrar(function (IditenaUtility $u): void {
+    $u->clean = [IditenaClean::class, 'call'];
+    $u->clean_add = [IditenaClean::class, 'add'];
+    $u->clean_explain = [IditenaDone::class, 'clean_explain'];
+    $u->done = [IditenaDone::class, 'call'];
+    $u->make_error = [IditenaMakeError::class, 'call'];
+    $u->feature_add = [IditenaFeatureAdd::class, 'call'];
+    $u->feature_hook = [IditenaFeatureHook::class, 'call'];
+    $u->feature_init = [IditenaFeatureInit::class, 'call'];
+    $u->fetcher = [IditenaFetcher::class, 'call'];
+    $u->make_fetch_def = [IditenaMakeFetchDef::class, 'call'];
+    $u->make_context = [IditenaMakeContext::class, 'call'];
+    $u->make_options = [IditenaMakeOptions::class, 'call'];
+    $u->make_request = [IditenaMakeRequest::class, 'call'];
+    $u->make_response = [IditenaMakeResponse::class, 'call'];
+    $u->make_result = [IditenaMakeResult::class, 'call'];
+    $u->make_point = [IditenaMakePoint::class, 'call'];
+    $u->make_spec = [IditenaMakeSpec::class, 'call'];
+    $u->make_url = [IditenaMakeUrl::class, 'call'];
+    $u->param = [IditenaParam::class, 'call'];
+    $u->prepare_auth = [IditenaPrepareAuth::class, 'call'];
+    $u->prepare_body = [IditenaPrepareBody::class, 'call'];
+    $u->prepare_headers = [IditenaPrepareHeaders::class, 'call'];
+    $u->prepare_method = [IditenaPrepareMethod::class, 'call'];
+    $u->prepare_params = [IditenaPrepareParams::class, 'call'];
+    $u->prepare_path = [IditenaPreparePath::class, 'call'];
+    $u->prepare_query = [IditenaPrepareQuery::class, 'call'];
+    $u->graphql_body = [IditenaGraphql::class, 'body'];
+    $u->graphql_errors = [IditenaGraphql::class, 'errors'];
+    $u->result_basic = [IditenaResultBasic::class, 'call'];
+    $u->result_body = [IditenaResultBody::class, 'call'];
+    $u->result_headers = [IditenaResultHeaders::class, 'call'];
+    $u->transform_request = [IditenaTransformRequest::class, 'call'];
+    $u->transform_response = [IditenaTransformResponse::class, 'call'];
+});

@@ -1,0 +1,7 @@
+# Entity Models
+
+@"./district_result.aontu"
+@"./finder_index.aontu"
+@"./uik_index.aontu"
+@"./uik_region.aontu"
+@"./visitor_report.aontu"

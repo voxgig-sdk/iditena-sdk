@@ -1,0 +1,89 @@
+{
+  "existing": {
+    "district_result": {
+      "DISTRICT_RESULT00": {
+        "aggregateSource": "sa0",
+        "candidates": [],
+        "districtName": "sa2",
+        "districtNumber": 163,
+        "invalid": {},
+        "parties": [],
+        "partiesInvalid": {},
+        "partiesPrecinctsCounted": 167,
+        "partiesTurnout": {},
+        "precincts": [],
+        "precinctsCounted": 170,
+        "precinctsTotal": 171,
+        "precinctsTotalSource": "sac",
+        "sourceAt": "sad",
+        "turnout": {},
+        "updatedAt": "saf"
+      },
+      "DISTRICT_RESULT01": {
+        "aggregateSource": "s140",
+        "candidates": [],
+        "districtName": "s142",
+        "districtNumber": 323,
+        "invalid": {},
+        "parties": [],
+        "partiesInvalid": {},
+        "partiesPrecinctsCounted": 327,
+        "partiesTurnout": {},
+        "precincts": [],
+        "precinctsCounted": 330,
+        "precinctsTotal": 331,
+        "precinctsTotalSource": "s14c",
+        "sourceAt": "s14d",
+        "turnout": {},
+        "updatedAt": "s14f"
+      },
+      "DISTRICT_RESULT02": {
+        "aggregateSource": "s1e0",
+        "candidates": [],
+        "districtName": "s1e2",
+        "districtNumber": 483,
+        "invalid": {},
+        "parties": [],
+        "partiesInvalid": {},
+        "partiesPrecinctsCounted": 487,
+        "partiesTurnout": {},
+        "precincts": [],
+        "precinctsCounted": 490,
+        "precinctsTotal": 491,
+        "precinctsTotalSource": "s1ec",
+        "sourceAt": "s1ed",
+        "turnout": {},
+        "updatedAt": "s1ef"
+      }
+    }
+  },
+  "new": {
+    "district_result": {
+      "district_result_ref01": {
+        "aggregateSource": "s280",
+        "candidates": [],
+        "districtName": "s282",
+        "districtNumber": 643,
+        "invalid": {},
+        "parties": [],
+        "partiesInvalid": {},
+        "partiesPrecinctsCounted": 647,
+        "partiesTurnout": {},
+        "precincts": [],
+        "precinctsCounted": 650,
+        "precinctsTotal": 651,
+        "precinctsTotalSource": "s28c",
+        "sourceAt": "s28d",
+        "turnout": {},
+        "updatedAt": "s28f"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/results": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

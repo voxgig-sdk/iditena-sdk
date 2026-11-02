@@ -1,0 +1,81 @@
+{
+  "existing": {
+    "uik_index": {
+      "UIK_INDEX00": {
+        "cik": "s8c",
+        "cikHouses": "s8d",
+        "cikHousesCount": 142,
+        "cikObserved": "s8f",
+        "cikObservedCount": 144,
+        "count": 145,
+        "fallback": "s92",
+        "fallbackCount": 147,
+        "file": "s94",
+        "houses": "s95",
+        "housesIndex": "s96",
+        "housesIndexUrl": "s97",
+        "region": "s98",
+        "slug": "s99"
+      },
+      "UIK_INDEX01": {
+        "cik": "s118",
+        "cikHouses": "s119",
+        "cikHousesCount": 282,
+        "cikObserved": "s11b",
+        "cikObservedCount": 284,
+        "count": 285,
+        "fallback": "s11e",
+        "fallbackCount": 287,
+        "file": "s120",
+        "houses": "s121",
+        "housesIndex": "s122",
+        "housesIndexUrl": "s123",
+        "region": "s124",
+        "slug": "s125"
+      },
+      "UIK_INDEX02": {
+        "cik": "s1a4",
+        "cikHouses": "s1a5",
+        "cikHousesCount": 422,
+        "cikObserved": "s1a7",
+        "cikObservedCount": 424,
+        "count": 425,
+        "fallback": "s1aa",
+        "fallbackCount": 427,
+        "file": "s1ac",
+        "houses": "s1ad",
+        "housesIndex": "s1ae",
+        "housesIndexUrl": "s1af",
+        "region": "s1b0",
+        "slug": "s1b1"
+      }
+    }
+  },
+  "new": {
+    "uik_index": {
+      "uik_index_ref01": {
+        "cik": "s230",
+        "cikHouses": "s231",
+        "cikHousesCount": 562,
+        "cikObserved": "s233",
+        "cikObservedCount": 564,
+        "count": 565,
+        "fallback": "s236",
+        "fallbackCount": 567,
+        "file": "s238",
+        "houses": "s239",
+        "housesIndex": "s23a",
+        "housesIndexUrl": "s23b",
+        "region": "s23c",
+        "slug": "s23d"
+      }
+    }
+  },
+  "requests": {
+    "GET /data/uik/index.json": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

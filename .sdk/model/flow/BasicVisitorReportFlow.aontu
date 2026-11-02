@@ -1,0 +1,28 @@
+# BasicVisitorReportFlow
+
+main: kit: flow: BasicVisitorReportFlow:
+{
+  entity: "visitor_report",
+  kind: "basic",
+  name: "BasicVisitorReportFlow",
+  step: [
+    {
+      i: {
+        ref: "visitor_report_ref01",
+        srcdatavar: "visitor_report_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-visitor_report_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicVisitorReportFlow"
+}

@@ -1,0 +1,65 @@
+# Entity: finder_index
+
+main: kit: entity: finder_index: {
+
+  alias: field: {}
+
+  fields: {
+    districts: {
+      h: "Districts"
+      n: "districts"
+      r: true
+      t: "`$ARRAY`"
+    }
+    snapshot: {
+      fo: "date"
+      h: "Snapshot"
+      n: "snapshot"
+      r: false
+      t: "`$STRING`"
+    }
+    tiles: {
+      h: "Tiles"
+      n: "tiles"
+      r: true
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "finder_index"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /data/finder-index.json"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/data/finder-index.json"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "data"
+            }
+            {
+              lit: "finder-index.json"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

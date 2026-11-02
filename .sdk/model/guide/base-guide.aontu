@@ -1,0 +1,42 @@
+# Generated from the API definition and overwritten on every build: do not
+# edit this file. Put customizations in the guide entry file, which includes
+# this one and overrides its defaults:
+#   guide.aontu
+
+guide: {
+  metrics: count: entity: 5
+  metrics: count: path: 5
+  metrics: count: method: 5
+
+  entity: district_result: {
+    path: "/api/results": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: finder_index: {
+    path: "/data/finder-index.json": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: uik_index: {
+    path: "/data/uik/index.json": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: uik_region: {
+    path: "/data/uik/{region}.json": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.stations`")|top
+    }
+  }
+
+  entity: visitor_report: {
+    path: "/api/district-visitors": {
+      op: load: method: *GET
+    }
+  }
+
+}

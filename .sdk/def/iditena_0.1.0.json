@@ -1,0 +1,587 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Iditena API",
+    "version": "1.0.0",
+    "description": "Public JSON feeds behind iditena.org, a site covering the September 2026 Russian State Duma elections: single-member district results, the district/candidate finder index, polling-station (UIK) locations, and site visitor counters per district. Knowledge source: the community Swift client https://github.com/l0v3m0n3y/iditena (src/iditena.swift lists four endpoints; there is no documentation) and live GET probes on 2026-10-23, from which every schema here is taken. getUikRegion is not in the client; its path comes from the 'file' field of getUikIndex and was probed for one region. Unverified: the meaning of the two integers per district in getDistrictVisitors (undocumented); /api/results with no district parameter returns a different, all-district summary shape that is not modelled here; only 68 of 83 regions carry a 'file' for getUikRegion, so the others probably 404. Text is in Russian. The data is a post-election snapshot and may stop updating."
+  },
+  "servers": [
+    {
+      "url": "https://iditena.org"
+    }
+  ],
+  "paths": {
+    "/api/results": {
+      "get": {
+        "operationId": "getDistrictResult",
+        "summary": "Get one district's election results",
+        "description": "Candidate and party-list results for one single-member district, with per-precinct rows.",
+        "parameters": [
+          {
+            "name": "district",
+            "in": "query",
+            "required": true,
+            "description": "Single-member district number, 1 to 225. Out-of-range values return 400 {\"error\":\"invalid district\"}.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 225
+            },
+            "example": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "District results.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistrictResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid district.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/district-visitors": {
+      "get": {
+        "operationId": "getVisitorReport",
+        "summary": "Get site visitor counters per district",
+        "responses": {
+          "200": {
+            "description": "Visitor counters keyed by district number.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VisitorReport"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/finder-index.json": {
+      "get": {
+        "operationId": "getFinderIndex",
+        "summary": "Get the district and candidate finder index",
+        "description": "Region map tiles plus every single-member district with its candidates.",
+        "responses": {
+          "200": {
+            "description": "Finder index.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FinderIndex"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/uik/index.json": {
+      "get": {
+        "operationId": "getUikIndex",
+        "summary": "Get the polling-station (UIK) index",
+        "description": "District names keyed by number, and per-region pointers to the polling-station files.",
+        "responses": {
+          "200": {
+            "description": "UIK index.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UikIndex"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/uik/{region}.json": {
+      "get": {
+        "operationId": "getUikRegion",
+        "summary": "Get one region's polling stations",
+        "parameters": [
+          {
+            "name": "region",
+            "in": "path",
+            "required": true,
+            "description": "Region file stem: the 'file' value from getUikIndex without '.json' (usually equal to the region slug).",
+            "schema": {
+              "type": "string"
+            },
+            "example": "altayskiy-kray"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Polling stations in the region.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UikRegion"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "invalid district"
+          }
+        }
+      },
+      "VoteShare": {
+        "type": "object",
+        "properties": {
+          "votes": {
+            "type": "integer"
+          },
+          "share": {
+            "type": "number",
+            "description": "Percentage."
+          }
+        },
+        "required": [
+          "votes",
+          "share"
+        ],
+        "description": "A vote count and its percentage share."
+      },
+      "Tally": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "votes": {
+            "type": "integer"
+          },
+          "share": {
+            "type": "number",
+            "description": "Percentage of valid votes."
+          }
+        },
+        "required": [
+          "name",
+          "votes",
+          "share"
+        ],
+        "description": "Votes for one candidate or party."
+      },
+      "DistrictResult": {
+        "type": "object",
+        "properties": {
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sourceAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of the source data (Moscow time offset)."
+          },
+          "districtNumber": {
+            "type": "integer",
+            "example": 1
+          },
+          "districtName": {
+            "type": "string"
+          },
+          "precinctsTotal": {
+            "type": "integer"
+          },
+          "precinctsTotalSource": {
+            "type": "string",
+            "example": "reported"
+          },
+          "precinctsCounted": {
+            "type": "integer"
+          },
+          "candidates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tally"
+            },
+            "description": "Single-member district candidates, highest first."
+          },
+          "turnout": {
+            "$ref": "#/components/schemas/VoteShare"
+          },
+          "invalid": {
+            "$ref": "#/components/schemas/VoteShare"
+          },
+          "precincts": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            "description": "One row of integers per precinct: [precinct number, registered voters, ballots cast, invalid ballots, then one vote count per candidate in the order of 'candidates']. Verified by summing the columns for district 1, which reproduce the candidate, turnout and invalid totals."
+          },
+          "parties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tally"
+            },
+            "description": "Party-list results within the district."
+          },
+          "partiesPrecinctsCounted": {
+            "type": "integer"
+          },
+          "partiesTurnout": {
+            "$ref": "#/components/schemas/VoteShare"
+          },
+          "partiesInvalid": {
+            "$ref": "#/components/schemas/VoteShare"
+          },
+          "aggregateSource": {
+            "type": "string",
+            "example": "district"
+          }
+        },
+        "required": [
+          "districtNumber",
+          "candidates",
+          "precincts",
+          "parties"
+        ]
+      },
+      "VisitorReport": {
+        "type": "object",
+        "properties": {
+          "dateFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dateTo": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fetchedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "closedAt": {
+            "type": "object",
+            "description": "Poll closing time per district, keyed by district number.",
+            "additionalProperties": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "districts": {
+            "type": "object",
+            "description": "Two integer counters per district, keyed by district number. Their meaning is undocumented (probably visitors and page views).",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "required": [
+          "districts"
+        ]
+      },
+      "Tile": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "integer",
+            "description": "Column in the tile map."
+          },
+          "y": {
+            "type": "integer",
+            "description": "Row in the tile map."
+          },
+          "label": {
+            "type": "string",
+            "example": "КАР"
+          },
+          "region": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "county": {
+            "type": "string",
+            "description": "Federal district."
+          }
+        },
+        "description": "One region tile of the cartogram."
+      },
+      "DistrictCandidate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "d001_3fccdb93e916"
+          },
+          "name": {
+            "type": "string"
+          },
+          "party": {
+            "type": "string"
+          },
+          "partyShort": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          }
+        }
+      },
+      "District": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "region": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "shortName": {
+            "type": "string"
+          },
+          "territory": {
+            "type": "string"
+          },
+          "voters": {
+            "type": "integer"
+          },
+          "cardStatus": {
+            "type": "string",
+            "description": "Seen: data_available, identity_only, partial_data."
+          },
+          "availableCandidateCount": {
+            "type": "integer"
+          },
+          "candidates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DistrictCandidate"
+            }
+          }
+        }
+      },
+      "FinderIndex": {
+        "type": "object",
+        "properties": {
+          "snapshot": {
+            "type": "string",
+            "format": "date",
+            "example": "2026-09-16"
+          },
+          "tiles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tile"
+            }
+          },
+          "districts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/District"
+            }
+          }
+        },
+        "required": [
+          "tiles",
+          "districts"
+        ]
+      },
+      "UikDistrict": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "shortName": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          }
+        }
+      },
+      "UikRegionEntry": {
+        "type": "object",
+        "properties": {
+          "region": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string",
+            "example": "altayskiy-kray"
+          },
+          "count": {
+            "type": "integer"
+          },
+          "cik": {
+            "type": "string",
+            "description": "Region code."
+          },
+          "file": {
+            "type": "string",
+            "description": "Polling-station file name under /data/uik/; absent for some regions.",
+            "example": "altayskiy-kray.json"
+          },
+          "fallback": {
+            "type": "string"
+          },
+          "fallbackCount": {
+            "type": "integer"
+          },
+          "cikHouses": {
+            "type": "string"
+          },
+          "cikHousesCount": {
+            "type": "integer"
+          },
+          "cikObserved": {
+            "type": "string"
+          },
+          "cikObservedCount": {
+            "type": "integer"
+          },
+          "houses": {
+            "type": "string"
+          },
+          "housesIndex": {
+            "type": "string"
+          },
+          "housesIndexUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "region",
+          "slug",
+          "count",
+          "cik"
+        ]
+      },
+      "UikIndex": {
+        "type": "object",
+        "properties": {
+          "snapshot": {
+            "type": "string",
+            "format": "date"
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            }
+          },
+          "districts": {
+            "type": "object",
+            "description": "Keyed by district number.",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/UikDistrict"
+            }
+          },
+          "regions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UikRegionEntry"
+            }
+          }
+        },
+        "required": [
+          "districts",
+          "regions"
+        ]
+      },
+      "PollingStation": {
+        "type": "object",
+        "properties": {
+          "n": {
+            "type": "integer",
+            "description": "Polling station (UIK) number."
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string"
+          },
+          "area": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "lat": {
+            "type": "number"
+          },
+          "lon": {
+            "type": "number"
+          },
+          "district": {
+            "type": "integer",
+            "description": "Single-member district number."
+          }
+        }
+      },
+      "UikRegion": {
+        "type": "object",
+        "properties": {
+          "region": {
+            "type": "string"
+          },
+          "snapshot": {
+            "type": "string",
+            "format": "date"
+          },
+          "stations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PollingStation"
+            }
+          }
+        },
+        "required": [
+          "stations"
+        ]
+      }
+    }
+  }
+}

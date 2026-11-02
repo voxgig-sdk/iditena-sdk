@@ -1,0 +1,135 @@
+# Entity: uik_index
+
+main: kit: entity: uik_index: {
+
+  alias: field: {}
+
+  fields: {
+    cik: {
+      h: "Cik"
+      n: "cik"
+      r: true
+      sh: "Region code."
+      t: "`$STRING`"
+    }
+    cikHouses: {
+      h: "Cik Houses"
+      n: "cikHouses"
+      r: false
+      t: "`$STRING`"
+    }
+    cikHousesCount: {
+      h: "Cik Houses Count"
+      n: "cikHousesCount"
+      r: false
+      t: "`$INTEGER`"
+    }
+    cikObserved: {
+      h: "Cik Observed"
+      n: "cikObserved"
+      r: false
+      t: "`$STRING`"
+    }
+    cikObservedCount: {
+      h: "Cik Observed Count"
+      n: "cikObservedCount"
+      r: false
+      t: "`$INTEGER`"
+    }
+    count: {
+      h: "Count"
+      n: "count"
+      r: true
+      t: "`$INTEGER`"
+    }
+    fallback: {
+      h: "Fallback"
+      n: "fallback"
+      r: false
+      t: "`$STRING`"
+    }
+    fallbackCount: {
+      h: "Fallback Count"
+      n: "fallbackCount"
+      r: false
+      t: "`$INTEGER`"
+    }
+    file: {
+      h: "File"
+      n: "file"
+      r: false
+      sh: "Polling-station file name under /data/uik/; absent for some regions."
+      t: "`$STRING`"
+    }
+    houses: {
+      h: "Houses"
+      n: "houses"
+      r: false
+      t: "`$STRING`"
+    }
+    housesIndex: {
+      h: "Houses Index"
+      n: "housesIndex"
+      r: false
+      t: "`$STRING`"
+    }
+    housesIndexUrl: {
+      h: "Houses Index Url"
+      n: "housesIndexUrl"
+      r: false
+      t: "`$STRING`"
+    }
+    region: {
+      h: "Region"
+      n: "region"
+      r: true
+      t: "`$STRING`"
+    }
+    slug: {
+      h: "Slug"
+      n: "slug"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "uik_index"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /data/uik/index.json"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/data/uik/index.json"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "data"
+            }
+            {
+              lit: "uik"
+            }
+            {
+              lit: "index.json"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

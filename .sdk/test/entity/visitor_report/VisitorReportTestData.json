@@ -1,0 +1,48 @@
+{
+  "existing": {
+    "visitor_report": {
+      "VISITOR_REPORT00": {
+        "closedAt": {},
+        "dateFrom": "s33",
+        "dateTo": "s34",
+        "districts": {},
+        "fetchedAt": "s36",
+        "id": "VISITOR_REPORT00"
+      },
+      "VISITOR_REPORT01": {
+        "closedAt": {},
+        "dateFrom": "s65",
+        "dateTo": "s66",
+        "districts": {},
+        "fetchedAt": "s68",
+        "id": "VISITOR_REPORT01"
+      },
+      "VISITOR_REPORT02": {
+        "closedAt": {},
+        "dateFrom": "s97",
+        "dateTo": "s98",
+        "districts": {},
+        "fetchedAt": "s9a",
+        "id": "VISITOR_REPORT02"
+      }
+    }
+  },
+  "new": {
+    "visitor_report": {
+      "visitor_report_ref01": {
+        "closedAt": {},
+        "dateFrom": "sc9",
+        "dateTo": "sca",
+        "districts": {},
+        "fetchedAt": "scc"
+      }
+    }
+  },
+  "requests": {
+    "GET /api/district-visitors": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

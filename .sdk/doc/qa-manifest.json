@@ -1,0 +1,26 @@
+{
+  "files": [
+    "SUMMARY.md"
+  ],
+  "config": ".sdk/doc/qa/vale.ini",
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "A vote count and its percentage share.",
+      "District results",
+      "Finder index",
+      "Party-list results within the district.",
+      "Poll closing time per district, keyed by district number.",
+      "Polling station (UIK) number.",
+      "Polling stations in the region",
+      "Polling-station file name under /data/uik/; absent for some regions.",
+      "Public JSON feeds behind iditena.org, a site covering the September 2026 Russian State Duma elections: single-member district results, the district/candidate finder index, polling-station (UIK) locations, and site visitor counters per district. Knowledge source: the community Swift client https://github.com/l0v3m0n3y/iditena (src/iditena.swift lists four endpoints; there is no documentation) and live GET probes on 2026-10-23, from which every schema here is taken. getUikRegion is not in the client; its path comes from the &#39;file&#39; field of getUikIndex and was probed for one region. Unverified: the meaning of the two integers per district in getDistrictVisitors (undocumented); /api/results with no district parameter returns a different, all-district summary shape that is not modelled here; only 68 of 83 regions carry a &#39;file&#39; for getUikRegion, so the others probably 404. Text is in Russian. The data is a post-election snapshot and may stop updating.",
+      "Region code.",
+      "Single-member district candidates, highest first.",
+      "Single-member district number.",
+      "Two integer counters per district, keyed by district number. Their meaning is undocumented (probably visitors and page views).",
+      "UIK index",
+      "Visitor counters keyed by district number"
+    ]
+  }
+}

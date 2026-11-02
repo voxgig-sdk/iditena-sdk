@@ -1,0 +1,37 @@
+{
+  "existing": {
+    "finder_index": {
+      "FINDER_INDEX00": {
+        "districts": [],
+        "snapshot": "s1f",
+        "tiles": []
+      },
+      "FINDER_INDEX01": {
+        "districts": [],
+        "snapshot": "s3d",
+        "tiles": []
+      },
+      "FINDER_INDEX02": {
+        "districts": [],
+        "snapshot": "s5b",
+        "tiles": []
+      }
+    }
+  },
+  "new": {
+    "finder_index": {
+      "finder_index_ref01": {
+        "districts": [],
+        "snapshot": "s79",
+        "tiles": []
+      }
+    }
+  },
+  "requests": {
+    "GET /data/finder-index.json": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

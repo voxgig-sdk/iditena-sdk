@@ -1,0 +1,169 @@
+# Entity: district_result
+
+main: kit: entity: district_result: {
+
+  alias: field: {}
+
+  fields: {
+    aggregateSource: {
+      h: "Aggregate Source"
+      n: "aggregateSource"
+      r: false
+      t: "`$STRING`"
+    }
+    candidates: {
+      h: "Candidates"
+      n: "candidates"
+      r: true
+      sh: "Single-member district candidates, highest first."
+      t: "`$ARRAY`"
+    }
+    districtName: {
+      h: "District Name"
+      n: "districtName"
+      r: false
+      t: "`$STRING`"
+    }
+    districtNumber: {
+      h: "District Number"
+      n: "districtNumber"
+      r: true
+      t: "`$INTEGER`"
+    }
+    invalid: {
+      h: "Invalid"
+      n: "invalid"
+      r: true
+      sh: "A vote count and its percentage share."
+      t: "`$OBJECT`"
+    }
+    parties: {
+      h: "Parties"
+      n: "parties"
+      r: true
+      sh: "Party-list results within the district."
+      t: "`$ARRAY`"
+    }
+    partiesInvalid: {
+      h: "Parties Invalid"
+      n: "partiesInvalid"
+      r: true
+      sh: "A vote count and its percentage share."
+      t: "`$OBJECT`"
+    }
+    partiesPrecinctsCounted: {
+      h: "Parties Precincts Counted"
+      n: "partiesPrecinctsCounted"
+      r: false
+      t: "`$INTEGER`"
+    }
+    partiesTurnout: {
+      h: "Parties Turnout"
+      n: "partiesTurnout"
+      r: true
+      sh: "A vote count and its percentage share."
+      t: "`$OBJECT`"
+    }
+    precincts: {
+      h: "Precincts"
+      n: "precincts"
+      r: true
+      sh: "One row of integers per precinct: [precinct number, registered voters, ballots cast, invalid ballots, then one vote count per candidate in the order of 'candidates']."
+      t: "`$ARRAY`"
+    }
+    precinctsCounted: {
+      h: "Precincts Counted"
+      n: "precinctsCounted"
+      r: false
+      t: "`$INTEGER`"
+    }
+    precinctsTotal: {
+      h: "Precincts Total"
+      n: "precinctsTotal"
+      r: false
+      t: "`$INTEGER`"
+    }
+    precinctsTotalSource: {
+      h: "Precincts Total Source"
+      n: "precinctsTotalSource"
+      r: false
+      t: "`$STRING`"
+    }
+    sourceAt: {
+      fo: "date-time"
+      h: "Source At"
+      n: "sourceAt"
+      r: false
+      sh: "Timestamp of the source data (Moscow time offset)."
+      t: "`$STRING`"
+    }
+    turnout: {
+      h: "Turnout"
+      n: "turnout"
+      r: true
+      sh: "A vote count and its percentage share."
+      t: "`$OBJECT`"
+    }
+    updatedAt: {
+      fo: "date-time"
+      h: "Updated At"
+      n: "updatedAt"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "district_result"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/results"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 1
+                k: "query"
+                n: "district"
+                or: "district"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/results"
+          q: {
+            exist: [
+              "district"
+            ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "results"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

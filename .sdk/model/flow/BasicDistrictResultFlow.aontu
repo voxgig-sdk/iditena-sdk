@@ -1,0 +1,22 @@
+# BasicDistrictResultFlow
+
+main: kit: flow: BasicDistrictResultFlow:
+{
+  entity: "district_result",
+  kind: "basic",
+  name: "BasicDistrictResultFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "district_result_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicDistrictResultFlow"
+}

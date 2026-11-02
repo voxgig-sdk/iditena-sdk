@@ -1,0 +1,22 @@
+# BasicUikIndexFlow
+
+main: kit: flow: BasicUikIndexFlow:
+{
+  entity: "uik_index",
+  kind: "basic",
+  name: "BasicUikIndexFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "uik_index_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicUikIndexFlow"
+}

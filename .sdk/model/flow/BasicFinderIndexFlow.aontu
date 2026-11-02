@@ -1,0 +1,22 @@
+# BasicFinderIndexFlow
+
+main: kit: flow: BasicFinderIndexFlow:
+{
+  entity: "finder_index",
+  kind: "basic",
+  name: "BasicFinderIndexFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "finder_index_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicFinderIndexFlow"
+}
